@@ -40,15 +40,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Health")
 		float TakeDamage(float DamageTaken, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
-	/*
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPlayerDeath);
-	UPROPERTY(BlueprintAssignable, Category = "Interaction")
-		FOnPlayerDeath OnPlayerDeath;
-	*/
+	AController* LastAttacker;
 
 	UFUNCTION(BlueprintNativeEvent, Category = "MyEvents")
-	void OnPlayerDeath();
-	void OnPlayerDeath_Implementation();
+	void OnPlayerDeath(AController* lastAttacker);
+	void OnPlayerDeath_Implementation(AController* lastAttacker);
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)

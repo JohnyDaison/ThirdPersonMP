@@ -99,7 +99,7 @@ void AThirdPersonMPCharacter::OnHealthUpdate()
 
 		if (CurrentHealth <= 0)
 		{
-			OnPlayerDeath();
+			OnPlayerDeath(LastAttacker);
 		}
 	}
 
@@ -109,7 +109,7 @@ void AThirdPersonMPCharacter::OnHealthUpdate()
 	*/
 }
 
-void AThirdPersonMPCharacter::OnPlayerDeath_Implementation() {};
+void AThirdPersonMPCharacter::OnPlayerDeath_Implementation(AController* lastAttacker) {};
 
 void AThirdPersonMPCharacter::SetCurrentHealth(float healthValue)
 {
@@ -123,6 +123,7 @@ void AThirdPersonMPCharacter::SetCurrentHealth(float healthValue)
 float AThirdPersonMPCharacter::TakeDamage(float DamageTaken, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
 	float damageApplied = CurrentHealth - DamageTaken;
+	LastAttacker = EventInstigator;
 	SetCurrentHealth(damageApplied);
 	return damageApplied;
 }
