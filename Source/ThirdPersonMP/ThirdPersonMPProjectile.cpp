@@ -7,6 +7,7 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "GameFramework/DamageType.h"
 #include "Particles/ParticleSystem.h"
+#include "Particles/ParticleSystemComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "UObject/ConstructorHelpers.h"
 
@@ -42,6 +43,16 @@ AThirdPersonMPProjectile::AThirdPersonMPProjectile()
 		StaticMesh->SetRelativeScale3D(FVector(0.75f, 0.75f, 0.75f));
 	}
 
+	// Flight particles
+	FlightEffect = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("MovementParticles"));
+	FlightEffect->SetupAttachment(SphereComponent);
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> ParticleAsset(TEXT("/Game/StarterContent/Particles/P_Fire.P_Fire"));
+	if (ParticleAsset.Succeeded())
+	{
+		FlightEffect->SetTemplate(ParticleAsset.Object);
+	}
+
+	// Explosion particles
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> DefaultExplosionEffect(TEXT("/Game/StarterContent/Particles/P_Explosion.P_Explosion"));
 	if (DefaultExplosionEffect.Succeeded())
 	{

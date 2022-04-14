@@ -27,6 +27,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 		class UProjectileMovementComponent* ProjectileMovementComponent;
 
+	UPROPERTY(EditAnywhere, Category = "Effects")
+		class UParticleSystemComponent* FlightEffect;
+
 	// Particle used when the projectile impacts against another object and explodes.
 	UPROPERTY(EditAnywhere, Category = "Effects")
 		class UParticleSystem* ExplosionEffect;
