@@ -14,4 +14,16 @@ class THIRDPERSONMP_API AMyPlayerState : public APlayerState
 {
 	GENERATED_BODY()
 	
+public:
+	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	UPROPERTY(Replicated)
+		float PlayerHealth;
+
+	UFUNCTION(BlueprintPure, Category = "Health")
+		FORCEINLINE float GetPlayerHealth() const { return PlayerHealth; }
+
+	UFUNCTION(BlueprintCallable, Category = "Health")
+		void SetPlayerHealth(float healthValue);
+
 };

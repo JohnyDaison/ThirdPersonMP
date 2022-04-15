@@ -10,6 +10,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "ThirdPersonMPProjectile.h"
+#include "MyPlayerState.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AThirdPersonMPCharacter
@@ -95,6 +96,10 @@ void AThirdPersonMPCharacter::OnHealthUpdate()
 	{
 		FString healthMessage = FString::Printf(TEXT("%s now has %f health remaining."), *GetFName().ToString(), CurrentHealth);
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, healthMessage);
+
+		AMyPlayerState* state = (AMyPlayerState*) GetPlayerState();
+
+		state->PlayerHealth = CurrentHealth;
 
 		if (CurrentHealth <= 0)
 		{
