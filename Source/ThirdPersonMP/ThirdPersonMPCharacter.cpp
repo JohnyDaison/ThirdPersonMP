@@ -150,7 +150,7 @@ void AThirdPersonMPCharacter::StopFire()
 
 void AThirdPersonMPCharacter::HandleFire_Implementation()
 {
-	FVector spawnLocation = GetActorLocation() + (GetControlRotation().Vector() * 100.0f) + (GetActorUpVector() * 50.0f);
+	FVector spawnLocation = GetActorLocation() + (GetControlRotation().Vector() * 100.0f) + (GetActorUpVector() * 100.0f);
 	FRotator spawnRotation = GetControlRotation();
 
 	FActorSpawnParameters spawnParameters;
